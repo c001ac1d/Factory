@@ -138,12 +138,14 @@ void DebugWindowDialog::SetFrameNumber(int frameNumber)
 	static int numDigits;
 	numDigits = frameNumber / 10 + 2;	// 1 for 1 additional digit, 1 for \0
 
+	char* data = const_cast<char*>(mFrameNumber.data());
+
 	mFrameNumber.resize(numDigits);
-	sprintf(mFrameNumber.begin(), "%d", frameNumber);
+	sprintf(data, "%d", frameNumber);
 
 	CWnd *pWnd = GetDlgItem(IDC_FrameNumber);
 	if (pWnd) {
-		pWnd->SetWindowText(mFrameNumber.begin());
+		pWnd->SetWindowText(data);
 	}
 }
 
