@@ -19,7 +19,7 @@
 #include <string>
 #include <cstdio>
 #include "Lib/BaseType.h"
-#include "Compression/Compression.h"
+#include <Compression/Compression.h>
 #include "../CRCDiff/Debug.h"
 
 #ifndef DEBUG

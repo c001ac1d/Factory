@@ -22,10 +22,7 @@
 //////////////////////////////////////////////////////////////////////////////
 
 #include "Compression.h"
-#include "LZHCompress/NoxCompress.h"
-extern "C" {
-#include "ZLib/zlib.h"
-}
+
 #include "EAC/codex.h"
 #include "EAC/btreecodex.h"
 #include "EAC/huffcodex.h"
@@ -141,7 +138,7 @@ Int CompressionManager::getMaxCompressedSize( Int uncompressedLen, CompressionTy
 	switch (compType)
 	{
 		case COMPRESSION_NOXLZH:
-			return CalcNewSize(uncompressedLen) + 8;
+			return 0;
 
 		case COMPRESSION_BTREE:   // guessing here
 		case COMPRESSION_HUFF:    // guessing here
@@ -240,6 +237,7 @@ Int CompressionManager::compressData( CompressionType compType, void *srcVoid, I
 			return 0;
 	}
 
+#if(0)
 	if (compType == COMPRESSION_NOXLZH)
 	{
 		memcpy(dest, "NOX\0", 4);
@@ -275,6 +273,8 @@ Int CompressionManager::compressData( CompressionType compType, void *srcVoid, I
 			return 0;
 		}
 	}
+
+#endif
 
 	return 0;
 }
@@ -316,7 +316,7 @@ Int CompressionManager::decompressData( void *srcVoid, Int srcLen, void *destVoi
 		else
 			return 0;
 	}
-
+#if(0)
 	if (compType == COMPRESSION_NOXLZH)
 	{
 		Bool ret = DecompressMemory(src+8, srcLen-8, dest, destLen);
@@ -344,7 +344,7 @@ Int CompressionManager::decompressData( void *srcVoid, Int srcLen, void *destVoi
 			return 0;
 		}
 	}
-
+#endif
 	return 0;
 }
 

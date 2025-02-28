@@ -1,4 +1,5 @@
 include_directories("Libraries/Include")
+include_directories("Libraries/Source")
 
 add_subdirectory("GameEngine")
 add_subdirectory("GameEngineDevice")
