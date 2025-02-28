@@ -53,7 +53,7 @@ void CreateTranslationTable ( void )
 		}
 
 		mb = i;
-		if ( MultiByteToWideChar (CP_ACP, MB_ERR_INVALID_CHARS, (LPCSTR) &mb, 2, &wc, 2 ) == 0 )
+		if ( MultiByteToWideChar (CP_ACP, MB_ERR_INVALID_CHARS, (LPCSTR) &mb, 2, reinterpret_cast<LPWSTR>(&wc), 2) == 0)
 		{
 			wc = 0;
 			last_error = GetLastError ( );

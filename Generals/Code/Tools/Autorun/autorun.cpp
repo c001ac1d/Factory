@@ -77,7 +77,6 @@
 #include <dos.h>
 #include <errno.h>
 #include <fcntl.h>
-#include <fstream.h>
 #include <io.h>
 #include <locale.h>
 #include <math.h>
@@ -87,7 +86,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
-#include <strstrea.h>
 #include <sys\stat.h>
 #include <time.h>
 #include <winuser.h>
@@ -339,7 +337,7 @@ int			Show_Message				( HWND window_handle, int message_num1 );
 void		Stop_Sound_Playing			( void );
 BOOL 		Valid_Environment 			( void );
 
-BOOL 		CALLBACK	Dialog_Box_Proc	( HWND window_handle, UINT message, WPARAM w_param, LPARAM l_param );
+intptr_t 		CALLBACK	Dialog_Box_Proc	( HWND window_handle, UINT message, WPARAM w_param, LPARAM l_param );
 LRESULT 	CALLBACK	Wnd_Proc 		( HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam );
 
 
@@ -2531,7 +2529,7 @@ LRESULT CALLBACK  Wnd_Proc ( HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lPa
 //   06/04/1996  MML : Created.                                            
 //=============================================================================
 
-BOOL CALLBACK  Dialog_Box_Proc( HWND window_handle, UINT message, WPARAM w_param, LPARAM l_param )
+intptr_t CALLBACK  Dialog_Box_Proc( HWND window_handle, UINT message, WPARAM w_param, LPARAM l_param )
 {
 	int		i = 0, j = 0;
 	int		nResult = 0;
@@ -3005,7 +3003,7 @@ BOOL CALLBACK  Dialog_Box_Proc( HWND window_handle, UINT message, WPARAM w_param
 					Msg( __LINE__, TEXT(__FILE__), TEXT("b800X600		= [%d]"), b800X600 );
 					Msg( __LINE__, TEXT(__FILE__), TEXT("ClientRect		= [%d,%d,%d,%d]"), dlg_rect.left, dlg_rect.top, dlg_rect.right, dlg_rect.bottom );
 					
-					for( index = 0; index < ( NUM_BUTTONS * 3 ) + 3; index++ ) {
+					for(int index = 0; index < ( NUM_BUTTONS * 3 ) + 3; index++ ) {
 						Msg( __LINE__, TEXT(__FILE__), TEXT("BackgroundRect[%d]	= [%d,%d,%d,%d]"), index, BackgroundRect[index].top, BackgroundRect[index].bottom, BackgroundRect[index].left, BackgroundRect[index].right );
 					}
 					

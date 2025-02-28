@@ -587,7 +587,7 @@ static int done_copy;
 static int start_copy;
 static LogFormat cpy_format;
 
-static DWORD CALLBACK streamin_cb (  DWORD dwCookie, LPBYTE pbBuff, LONG bytes,  LONG *transfered )
+static DWORD CALLBACK streamin_cb (  DWORD_PTR dwCookie, LPBYTE pbBuff, LONG bytes,  LONG *transfered )
 {
 	char *src = (char *) dwCookie;
 	int count = 0;
@@ -621,7 +621,7 @@ static DWORD CALLBACK streamin_cb (  DWORD dwCookie, LPBYTE pbBuff, LONG bytes, 
 	return 0;
 }
 
-static DWORD CALLBACK streamout_cb (  DWORD dwCookie, LPBYTE pbBuff, LONG bytes,  LONG *transfered )
+static DWORD CALLBACK streamout_cb (  DWORD_PTR dwCookie, LPBYTE pbBuff, LONG bytes,  LONG *transfered )
 {
 	FILE *log = (FILE *) dwCookie;
 	int count = 0;
@@ -646,7 +646,7 @@ void CNoxstringDlg::Log( const char *string, LogFormat format)
 
 
 	//rec->SetReadOnly ( FALSE );
-	es.dwCookie = (DWORD) string;
+	es.dwCookie = (DWORD_PTR) string;
 	es.dwError = 0;
 	es.pfnCallback = streamin_cb;
 	bytes_copied = 0;
@@ -700,7 +700,7 @@ int CNoxstringDlg::SaveLog()
 		fwrite ( buffer, 1, strlen ( buffer ), log );
 	}
 
-	es.dwCookie = (DWORD) log;
+	es.dwCookie = (DWORD_PTR) log;
 	es.dwError = 0;
 	es.pfnCallback = streamout_cb;
 	bytes_copied = 0;

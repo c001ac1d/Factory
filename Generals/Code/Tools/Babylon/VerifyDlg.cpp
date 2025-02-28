@@ -216,7 +216,7 @@ void VerifyDlg::CloseAudio ( void )
 	#endif
 }
 
-void VerifyDlg::OnTimer(UINT nIDEvent) 
+void VerifyDlg::OnTimer(UINT_PTR nIDEvent) 
 {
 	// TODO: Add your message handler code here and/or call default
 	if ( nIDEvent == TIMERID )

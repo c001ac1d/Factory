@@ -69,8 +69,8 @@ static void make_bk_name ( char *bkname, const char *filename )
 
 	strcpy ( bkname, filename );
 	
-	ext = strchr ( filename, '.' );
-	ext1 = strchr ( bkname, '.' );
+	ext = const_cast<char*>(strchr ( filename, '.' ));
+	ext1 = const_cast<char*>(strchr ( bkname, '.' ));
 
 	if ( ext )
 	{

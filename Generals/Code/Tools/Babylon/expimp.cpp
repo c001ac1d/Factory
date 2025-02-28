@@ -256,7 +256,7 @@ static int export_trans ( TransDB *db, LangID langid, TROPTIONS *options, void (
 		
 		while ( text )
 		{
-			int export;
+			int bexport;
 			int bad_format = FALSE;
 			int too_long = FALSE;
 
@@ -264,53 +264,53 @@ static int export_trans ( TransDB *db, LangID langid, TROPTIONS *options, void (
 
 			if ( options->filter == TR_UNSENT )
 			{
-				export = !text->IsSent ();
+				bexport = !text->IsSent ();
 			}
 			else	if ( options->filter == TR_NONDIALOG )
 			{
-				export = !text->IsDialog ();
+				bexport = !text->IsDialog ();
 			}
 			else if ( options->filter == TR_UNVERIFIED )
 			{
-					export = text->IsDialog() && text->DialogIsPresent( DialogPath, langid) && !text->DialogIsValid( DialogPath, langid);
+				bexport = text->IsDialog() && text->DialogIsPresent( DialogPath, langid) && !text->DialogIsValid( DialogPath, langid);
 			}
 			else if ( options->filter == TR_MISSING_DIALOG )
 			{
-					export = text->IsDialog() && !text->DialogIsPresent( DialogPath, langid);
+				bexport = text->IsDialog() && !text->DialogIsPresent( DialogPath, langid);
 			}
 			else if ( options->filter == TR_DIALOG )
 			{
-				export = text->IsDialog ();
+				bexport = text->IsDialog ();
 			}
 			else
 			{
-				if ( ! (export = all) )
+				if ( ! (bexport = all) )
 				{
 					if ( !trans )
 					{
-						export = TRUE;
+						bexport = TRUE;
 					}
 					else
 					{
 						if ( text->Revision () > trans->Revision ())
 						{
-							export = TRUE;
+							bexport = TRUE;
 						}
 						else if ( trans->TooLong ( label->MaxLen ()) )
 						{
-							export = TRUE;
+							bexport = TRUE;
 							too_long = TRUE;
 						}
 						else if ( !trans->ValidateFormat ( text ) )
 						{
-							export = TRUE;
+							bexport = TRUE;
 							bad_format = TRUE;
 						}
 					}
 				}
 			}
 
-			if ( export && text->Len () )
+			if (bexport && text->Len () )
 			{
 				count++;
 				if ( cb )

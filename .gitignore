@@ -1,0 +1,11 @@
+.vs/*
+.vs
+
+out
+out/*
+
+bin
+bin/*
+
+build
+build/*
